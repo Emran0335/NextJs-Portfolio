@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   align-items: center;
   gap: 96px;
@@ -10,20 +10,33 @@
   flex-direction: column;
   gap: 48px;
 }
-.title{
-  font-size: 64px;
+
+.title {
+  font-size: 54px;
   background: linear-gradient(to bottom, #194c33, #bbb);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .img {
   width: 100%;
   height: 528px;
-  object-fit: cover;
+  object-fit: contain;
+  animation: move 3s infinite ease alternate;
+}
+
+
+@keyframes move {
+  from {
+    transform: translateY(-10px);
+  }
+
+  to {
+    transform: translateY(10px);
+  }
 }
 
 .desc {
   font-size: 24px;
   font-weight: 300;
 }
-
