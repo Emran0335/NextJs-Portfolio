@@ -3,13 +3,26 @@ import styles from "./page.module.css"
 import Image from "next/image";
 import img from "../../../../public/2.png"
 import img3 from "../../../../public/3.png"
+import { notFound } from "next/navigation";
 
-const BlogPost = () => {
+
+async function getData(id) {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {cache: "no-store"});
+
+  if (!res.ok) {
+    return notFound()
+  }
+  return res.json();
+}
+
+const BlogPost = async ({params}) => {
+  // console.log(typeof params)
+  const data = await getData(params.id)
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <div className={styles.info}>
-          <h1 className={styles.title}>Lorem ipsum dolor sit amet.</h1>
+          <h1 className={styles.title}>{data.title}</h1>
           <p className={styles.desc}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos praesentium natus mollitia, aliquid harum animi unde labore delectus reiciendis soluta suscipit laudantium quae. Cumque ipsam doloribus, amet itaque et inventore repudiandae quas fugiat molestias facilis aspernatur, maiores voluptates quasi excepturi.</p>
           <div className={styles.author}>
             <Image
